@@ -1,7 +1,7 @@
 import setuptools
 
 
-with open('readme.md') as fh:
+with open('readme.md', encoding='utf8') as fh:
     long_description = fh.read()
     
 setuptools.setup(
@@ -13,7 +13,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/librian-center/liber-language',
-    packages=setuptools.find_packages(),
+    packages=['liber'],
     classifiers=[
         'Programming Language :: Python :: 3',
         'Operating System :: OS Independent',
