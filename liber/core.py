@@ -40,6 +40,7 @@ import logging
     },
 }
 續行組 = {
+    r'^(?P<有效字>(.|\n)*)\\$',
     '^(?=[^#])(.+?)(\|(.+?))? +(\[(?P<特效>.+?)\])? *(\((.+?)\))?「([^」]*)$',
     r'^```(.|\n)*(?<!\n```)$',
 }
@@ -90,12 +91,20 @@ def 行組解析(行組):
             continue
 
         當前行 = 當前行.rstrip('\r').rstrip('\n')
+        
         if 多行緩衝:
             當前行 = 多行緩衝 + '\n' + 當前行
             多行緩衝 = ''
-        if any([re.match(i, 當前行) for i in 續行組]):
-            多行緩衝 = 當前行
-            logging.debug(多行緩衝)
+        for 規則 in 續行組:
+            t = re.match(規則, 當前行)
+            if t:
+                if '有效字' in t.groupdict():
+                    多行緩衝 = t.groupdict()['有效字']
+                else:
+                    多行緩衝 = 當前行
+                logging.debug(多行緩衝)
+                break
+        if t:
             continue
 
         自 = {}
