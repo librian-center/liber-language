@@ -8,7 +8,7 @@ setuptools.setup(
     name='liber',
     version='0.0.6',
     author='RimoChan',
-    author_email='the@librian.it',
+    author_email='the@librian.net',
     description='A library to compile liber.',
     long_description=long_description,
     long_description_content_type='text/markdown',
