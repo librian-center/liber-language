@@ -6,7 +6,7 @@ with open('readme.md', encoding='utf8') as fh:
     
 setuptools.setup(
     name='liber',
-    version='0.0.6',
+    version='1.0.0',
     author='RimoChan',
     author_email='the@librian.net',
     description='A library to compile liber.',
