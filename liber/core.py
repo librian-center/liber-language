@@ -1,5 +1,6 @@
 import re
 import logging
+from typing import Any, Dict, List, Set, Sequence, TextIO, Union
 
 
 標識 = r'[^\#\>\"\+\-\=\ ]+?'
@@ -62,7 +63,7 @@ class parse_error(Exception):
     pass
 
 
-def 遞歸re(s, start=正則組):
+def 遞歸re(s: str, start: Dict[str, Any] = 正則組) -> List[Dict[str, Any]]:
     d = []
     for i in start:
         單位 = re.finditer(i, s)
@@ -77,7 +78,7 @@ def 遞歸re(s, start=正則組):
     return d
 
 
-def 加載(x):
+def 加載(x: Union[str, TextIO]) -> List[Dict[str, Any]]:
     import _io
     if type(x) is _io.TextIOWrapper:
         全文 = x.read()
@@ -89,7 +90,7 @@ def 加載(x):
     return 行組解析(行組)
 
 
-def 行組解析(行組):
+def 行組解析(行組: Sequence[str]) -> List[Dict[str, Any]]:
     全 = []
     多行緩衝 = ''
     for 當前行 in iter(行組):
@@ -133,3 +134,8 @@ def 行組解析(行組):
 
 
 load = 加載
+
+
+if __name__ == '__main__':
+    s = '> BG 中庭\n潘大爺 「你好啊！」'
+    print(load(s))
