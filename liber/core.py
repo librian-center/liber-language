@@ -79,15 +79,8 @@ def 遞歸re(s: str, start: Dict[str, Any] = 正則組) -> List[Dict[str, Any]]:
 
 
 def 加載(x: Union[str, TextIO]) -> List[Dict[str, Any]]:
-    import _io
-    if type(x) is _io.TextIOWrapper:
-        全文 = x.read()
-    else:
-        全文 = x
-    行組 = 全文.split('\n')
-    while 行組 and 行組[-1] == '':
-        行組.pop()
-    return 行組解析(行組)
+    全文 = (x.read() if hasattr(x, 'read') else x).rstrip('\n')
+    return 行組解析(全文.split('\n'))
 
 
 def 行組解析(行組: Sequence[str]) -> List[Dict[str, Any]]:
